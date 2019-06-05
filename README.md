@@ -11,6 +11,9 @@
 Word2Vec은 분산 된 텍스트 표현을 사용하여 개념 간 유사성을 본다. 
 ex) 파리와 프랑스가 베를린과 독일이 (수도와 나라) 같은 방식으로 관련되어 있음을 나타낸다.
 
+![wordgraph](./pics/wordgraph.png)
+
+실제로 백터차원에 영화 리뷰 말뭉치들 속에 있는 단어들을 임베딩 한 것이다.
 
 ## 2. Requirement
 - [BeautifulSoup 4](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
@@ -26,6 +29,8 @@ ex) 파리와 프랑스가 베를린과 독일이 (수도와 나라) 같은 방�
 = 총 5만 건의 data
 
 ## 4. Weight
+
+![problem](./pics/problem.png)
 
  태깅된 품사에 따라 피쳐 벡터 값의 가중치를 다르게 곱해주는 방식이며 형용사나 부사가 감성에 대한 정보를 더 많이 담고 있다는 가정에서 출발한 아이디어이다. 현재 영화 리뷰 감성 판별기에 가장 적합한 weight를 고안중이다. 
 
@@ -68,21 +73,9 @@ ex) 파리와 프랑스가 베를린과 독일이 (수도와 나라) 같은 방�
 
 예를 들어, "I/PRP(0.790)", "don't/VB(0.840)", "understand/VB(0.840)", "why(w4)", "many(w5)", "people(w6)", "don't(w7)", "like(w8)", "it(w9)" 에서의 피쳐는 각 9개의 단어의 **(벡터 공간에서의 값 * 품사에 따른 가중치)** 의 합으로 나타내어 진다.
 
-![training](./pics/training.PNG)
 
 
 ## 5. Result
 
-![softmax](./pics/softmax.png)
-      softmax 함수는 각 입력에 따라 결과값의 합을 1로 만들어 주는 함수이며, 긍정, 부정이 나올 확률 표현에 유용함
-      위의 함수 식에서, 음수 값 입력이 들어 오면 결과값에 영향이 거의 없다는 것에 기반하여 softmax 입력으로 들어 가기 전 score가 음수일 경우 무시하는 방법을 취함 
-- eval.py를 통해 test data에 문장 하나에 대해서 성능 확인 (**91.40%**)
-- eval.py에서 training option 설정 : True인 경우 new testset을 검사, False인 경우 직접 입력한 문장에 성능 확인
-- eval.py에서 30번째 줄의 NLP_Text_Classification_CNN/runs/"timemarking" 경로를 학습한 모델 경로로 설정해 주어야 함
+![result](./pics/result.png)
 
-
-![alt text](./pics/result.PNG)
-
-- eval.kaggle-data.py를 통해 말 뭉치 전체에 대해서 성능 확인(**67.95%**)
-- 부정에 편향된 불균등한 데이터 셋 개수(3 : 1), 모호성 극복의 어려움 등의 원인으로 한 문장에 비해 말 뭉치 전체에 대해서는 정확성이 현저히 떨어짐
-- 이를 극복하기 위해서는 다양하고 균형 있는 데이터 확보가 필요함
