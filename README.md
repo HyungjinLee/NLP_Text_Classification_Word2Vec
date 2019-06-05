@@ -77,5 +77,5 @@ ex) 파리와 프랑스가 베를린과 독일이 (수도와 나라) 같은 방�
 
 ## 5. Result
 
-![result](./pics/result.png)
+![result](./pics/result2.png)
 
